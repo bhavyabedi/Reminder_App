@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/data/data.dart';
-import 'package:reminder_app/models/data.dart';
 import 'package:reminder_app/remind_list.dart';
 
 class Home extends StatefulWidget {
@@ -12,10 +11,16 @@ class Home extends StatefulWidget {
   }
 }
 
+String _selectedActivity = 'Go to sleep';
+String _selectedDay = 'Monday';
+TimeOfDay _selectedTime = TimeOfDay.now();
+int _selectedEventIndex = 0;
+
+timeSelected(int index) {
+  times[index] = _selectedTime;
+}
+
 class _HomeState extends State<Home> {
-  String _selectedActivity = 'Go to sleep';
-  String _selectedDay = 'Monday';
-  TimeOfDay _selectedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,40 +39,53 @@ class _HomeState extends State<Home> {
           children: [
             Row(
               children: [
-                const Text('Choose a day'),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Choose a day'),
+                    //DaySelectDropDown
+                    DropdownButton(
+                      value: _selectedDay,
+                      items: days
+                          .map(
+                            (day) => DropdownMenuItem(
+                              value: day,
+                              child: Text(day),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        if (value == null) return;
+                        setState(() {
+                          _selectedDay = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
                 const Spacer(),
-                //DaySelectDropDown
-                DropdownButton(
-                    value: _selectedDay,
-                    items: reminders
-                        .map(
-                          (ActivityData activityData) => DropdownMenuItem(
-                            value: activityData.day,
-                            child: Text(activityData.day),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      if (value == null) return;
-                      setState(() {
-                        _selectedDay = value;
-                      });
-                    }),
-                const Spacer(),
-                const Text('Time'),
-                const Spacer(),
-                //TimePickerButton
-                IconButton(
-                  onPressed: () async {
-                    TimeOfDay? time = await showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                    );
-                    setState(() {
-                      _selectedTime = time!;
-                    });
-                  },
-                  icon: const Icon(Icons.more_time_sharp),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Choose Event'),
+                    DropdownButton(
+                      value: _selectedActivity,
+                      items: activitiesOut
+                          .map((activity) => DropdownMenuItem(
+                                value: activity,
+                                child: Text(activity),
+                              ))
+                          .toList(),
+                      onChanged: (selectedValue) {
+                        setState(() {
+                          _selectedActivity = selectedValue as String;
+                          _selectedEventIndex =
+                              activitiesOut.indexOf(selectedValue);
+                        });
+                        return;
+                      },
+                    )
+                  ],
                 )
               ],
             ),
@@ -76,31 +94,35 @@ class _HomeState extends State<Home> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Choose Event'),
                   const SizedBox(
                     width: 20,
                   ),
-                  DropdownButton(
-                    hint: const Text('Select Activity'),
-                    value: _selectedActivity,
-                    items: reminders
-                        .map((ActivityData activityData) => DropdownMenuItem(
-                              value: activityData.activities,
-                              child: Text(activityData.activities[1]),
-                            ))
-                        .toList(),
-                    onChanged: (selectedValue) {
+
+                  const Text('Time'),
+                  const Spacer(),
+                  //TimePickerButton
+                  IconButton(
+                    onPressed: () async {
+                      TimeOfDay? time = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
                       setState(() {
-                        _selectedActivity = selectedValue as String;
+                        _selectedTime = time!;
                       });
-                      return;
+                      timeSelected(_selectedEventIndex);
                     },
-                  )
+                    icon: const Icon(Icons.more_time_sharp),
+                  ),
                 ],
               ),
             ),
             const Text('Completed Tasks:'),
-            Remind_List(reminderData: reminders),
+            Expanded(
+              child: RemindList(
+                reminderData: reminders,
+              ),
+            ),
           ],
         ),
       ),

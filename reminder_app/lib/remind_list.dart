@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/models/data.dart';
 
-class Remind_List extends StatelessWidget {
-  Remind_List({super.key, required this.reminderData});
+class RemindList extends StatelessWidget {
+  const RemindList({super.key, required this.reminderData});
 
   final List<ActivityData> reminderData;
 
@@ -14,7 +14,16 @@ class Remind_List extends StatelessWidget {
         key: ValueKey(
           reminderData[index],
         ),
-        child: Text(reminderData[index].activities[index]),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            children: [
+              Text(reminderData[index].activities[index]),
+              const Spacer(),
+              Text({reminderData[index].time[index]}.toString()),
+            ],
+          ),
+        ),
       ),
     );
   }
