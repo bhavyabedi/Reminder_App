@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reminder_app/data/data.dart';
 import 'package:reminder_app/remind_list.dart';
@@ -20,8 +23,19 @@ int dayIndex = 0;
 class _HomeState extends State<Home> {
   void onRemoveTask(int index, String event) {
     setState(() {
-      reminders[index].activities.remove(event);
+      Reminders[index].activities.remove(event);
+      modifyjson();
     });
+  }
+
+  void modifyjson() {
+    // Convert the modified list of MyData objects back to JSON
+    List<Map<String, dynamic>> updatedJsonDataList =
+        Reminders.map((data) => data.toJson()).toList();
+    String updatedJsonString = json.encode(updatedJsonDataList);
+
+    // Write the updated JSON content back to the file
+    File('data/data.dart').writeAsStringSync(updatedJsonString);
   }
 
   void onCompleteEvent(int index, String event) {
@@ -32,7 +46,7 @@ class _HomeState extends State<Home> {
 
   void timeSelected(int index) {
     setState(() {
-      reminders[index].time[index] = _selectedTime;
+      Reminders[index].time[index] = _selectedTime;
     });
   }
 
@@ -83,7 +97,7 @@ class _HomeState extends State<Home> {
                     //EventSelectButton
                     DropdownButton<String>(
                       value: _selectedActivity,
-                      items: reminders[dayIndex]
+                      items: Reminders[dayIndex]
                           .activities
                           .map((activity) => DropdownMenuItem(
                                 value: activity,
@@ -135,7 +149,7 @@ class _HomeState extends State<Home> {
             const Text('Tasks:'),
             Expanded(
               child: RemindList(
-                reminderData: reminders[dayIndex],
+                reminderData: Reminders[dayIndex],
                 onRemoveEvent: onRemoveTask,
                 onCompleteEvent: onCompleteEvent,
               ),
