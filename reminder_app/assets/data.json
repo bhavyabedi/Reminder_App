@@ -1,0 +1,179 @@
+[
+    {
+      "day": "Monday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+    },
+
+    {
+      "day": "Tuesday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+    },
+    {
+      "day": "Wednesday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+    },
+    {
+      "day": "Thursday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+    },
+    {
+      "day": "Friday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+    },
+    {
+      "day": "Saturday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+    },
+    {
+      "day": "Sunday",
+      "pendingActivity": [
+        "Wake up",
+        "Go to gym",
+        "Breakfast",
+        "Meetings",
+        "Lunch",
+        "Quick nap",
+        "Go to library",
+        "Dinner",
+        "Go to sleep"
+      ],
+"completedActivity":[ ],
+"time":["8:00 AM",
+"8:00 AM",
+"9:00 AM ",
+"10:00 AM",
+"12:00 PM",
+"2:00 PM ",
+"4:00 PM",
+"7:00 PM",
+"10:00 PM" 
+]
+}
+]
+  

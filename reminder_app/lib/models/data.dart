@@ -32,18 +32,20 @@ final List<String> days = [
 class ActivityData {
   ActivityData({
     required this.day,
-    required this.activities,
+    required this.pendingActivity,
+    required this.completedActivity,
     required this.time,
   });
 
   final String day;
-  final List<String> activities;
+  final List<String> pendingActivity;
+  final List<String> completedActivity;
   final List<TimeOfDay> time;
 
   Map<String, dynamic> toJson() {
     return {
       'day': day,
-      'activities': activities,
+      'activities': pendingActivity,
       'time': time,
     };
   }
@@ -51,7 +53,8 @@ class ActivityData {
   factory ActivityData.fromJson(Map<String, dynamic> json) {
     return ActivityData(
       day: json['day'] as String,
-      activities: (json['activities'] as List).cast<String>(),
+      pendingActivity: (json['completedActivities'] as List).cast<String>(),
+      completedActivity: (json['pendingActivities'] as List).cast<String>(),
       time: (json['time'] as List).cast<TimeOfDay>(),
     );
   }
@@ -69,10 +72,10 @@ class ActivityData {
     "Dinner",
     "Go to sleep"
   ];
-  final List<ActivityData> reminders = [
+  final List<ActivityData> remindersDart = [
     ActivityData(
       day: days[0],
-      activities: [
+      pendingActivity: [
         "Wake up",
         'Go to gym',
         "Breakfast",
@@ -83,6 +86,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),
@@ -97,7 +101,7 @@ class ActivityData {
     ),
     ActivityData(
       day: days[1],
-      activities: [
+      pendingActivity: [
         //out as in outsourced
         "Wake up",
         'Go to gym',
@@ -109,6 +113,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),
@@ -123,7 +128,7 @@ class ActivityData {
     ),
     ActivityData(
       day: days[2],
-      activities: [
+      pendingActivity: [
         //out as in outsourced
         "Wake up",
         'Go to gym',
@@ -135,6 +140,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),
@@ -149,7 +155,7 @@ class ActivityData {
     ),
     ActivityData(
       day: days[3],
-      activities: [
+      pendingActivity: [
         //out as in outsourced
         "Wake up",
         'Go to gym',
@@ -161,6 +167,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),
@@ -175,7 +182,7 @@ class ActivityData {
     ),
     ActivityData(
       day: days[4],
-      activities: [
+      pendingActivity: [
         //out as in outsourced
         "Wake up",
         'Go to gym',
@@ -187,6 +194,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),
@@ -201,7 +209,7 @@ class ActivityData {
     ),
     ActivityData(
       day: days[5],
-      activities: [
+      pendingActivity: [
         //out as in outsourced
         "Wake up",
         'Go to gym',
@@ -213,6 +221,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),
@@ -227,7 +236,7 @@ class ActivityData {
     ),
     ActivityData(
       day: days[6],
-      activities: [
+      pendingActivity: [
         //out as in outsourced
         "Wake up",
         'Go to gym',
@@ -239,6 +248,7 @@ class ActivityData {
         "Dinner",
         "Go to sleep"
       ],
+      completedActivity: List.empty(),
       time: [
         timeconvert('8:00 AM'),
         timeconvert('8:00 AM'),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:reminder_app/models/data.dart';
 
@@ -19,14 +19,9 @@ class RemindList extends StatefulWidget {
   @override
   State<RemindList> createState() => _RemindListState();
 }
-
-String jsonString = File('data.json').readAsStringSync();
-
-// Parse the JSON string into a list of MyData objects
-List<ActivityData> Reminders = (json.decode(jsonString) as List)
-    .map((json) => ActivityData.fromJson(json))
-    .toList();
-
+Future<void> readJson() async{
+  final String response=await rootBundle.loadString(key)
+}
 class _RemindListState extends State<RemindList> {
   @override
   Widget build(BuildContext context) {
@@ -35,23 +30,23 @@ class _RemindListState extends State<RemindList> {
     print(Reminders);
     Color dismissedColor = Colors.orange;
     return ListView.builder(
-      itemCount: Reminders[1].activities.length,
+      itemCount: Reminders[1].pendingActivity.length,
       itemBuilder: (ctx, index) => Dismissible(
         key: ValueKey(
-          Reminders[index].activities[index],
+          Reminders[index].pendingActivity[index],
         ),
         background: Card(
           color: dismissedColor,
         ),
         child: Card(
           key: ValueKey(
-            Reminders[index].activities[index],
+            Reminders[index].pendingActivity[index],
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
-                Text(Reminders[index].activities[index]),
+                Text(Reminders[index].pendingActivity[index]),
                 const Spacer(),
                 Text({Reminders[index].time[index]}
                     .toString()
@@ -67,11 +62,11 @@ class _RemindListState extends State<RemindList> {
                 dismissedColor = Colors.green;
               });
               widget.onCompleteEvent(
-                  index, widget.reminderData.activities[index]);
+                  index, widget.reminderData.pendingActivity[index]);
               break;
             case DismissDirection.endToStart:
               widget.onRemoveEvent(
-                  index, widget.reminderData.activities[index]);
+                  index, widget.reminderData.pendingActivity[index]);
               break;
             default:
               print('Nothing');

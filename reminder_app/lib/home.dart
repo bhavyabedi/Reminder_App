@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:reminder_app/data/data.dart';
+import 'package:reminder_app/models/data.dart';
 import 'package:reminder_app/remind_list.dart';
 
 class Home extends StatefulWidget {
@@ -23,7 +23,7 @@ int dayIndex = 0;
 class _HomeState extends State<Home> {
   void onRemoveTask(int index, String event) {
     setState(() {
-      Reminders[index].activities.remove(event);
+      Reminders[index].pendingActivity.remove(event);
       modifyjson();
     });
   }
@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
 
   void onCompleteEvent(int index, String event) {
     setState(() {
-      reminders[index].activities.remove(event);
+      Reminders[index].pendingActivity.remove(event);
     });
   }
 
@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
                     DropdownButton<String>(
                       value: _selectedActivity,
                       items: Reminders[dayIndex]
-                          .activities
+                          .pendingActivity
                           .map((activity) => DropdownMenuItem(
                                 value: activity,
                                 child: Text(
@@ -109,8 +109,9 @@ class _HomeState extends State<Home> {
                       onChanged: (selectedValue) {
                         setState(() {
                           _selectedActivity = selectedValue as String;
-                          _selectedEventIndex =
-                              activities.indexOf(selectedValue);
+                          _selectedEventIndex = Reminders[dayIndex]
+                              .pendingActivity
+                              .indexOf(selectedValue);
                         });
                         return;
                       },
