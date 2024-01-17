@@ -15,23 +15,32 @@ String _selectedActivity = 'Go to sleep';
 String _selectedDay = 'Monday';
 TimeOfDay _selectedTime = TimeOfDay.now();
 int _selectedEventIndex = 0;
-
-timeSelected(int index) {
-  times[index] = _selectedTime;
-}
+int dayIndex = 0;
 
 class _HomeState extends State<Home> {
+  void onRemoveTask(int index, String event) {
+    setState(() {
+      reminders[index].activities.remove(event);
+    });
+  }
+
+  void onCompleteEvent(int index, String event) {
+    setState(() {
+      reminders[index].activities.remove(event);
+    });
+  }
+
+  void timeSelected(int index) {
+    setState(() {
+      reminders[index].time[index] = _selectedTime;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Remind Me'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add_box_outlined),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
@@ -44,13 +53,15 @@ class _HomeState extends State<Home> {
                   children: [
                     const Text('Choose a day'),
                     //DaySelectDropDown
-                    DropdownButton(
+                    DropdownButton<String>(
                       value: _selectedDay,
                       items: days
                           .map(
                             (day) => DropdownMenuItem(
                               value: day,
-                              child: Text(day),
+                              child: Text(
+                                day,
+                              ),
                             ),
                           )
                           .toList(),
@@ -58,6 +69,7 @@ class _HomeState extends State<Home> {
                         if (value == null) return;
                         setState(() {
                           _selectedDay = value;
+                          dayIndex = days.indexOf(value);
                         });
                       },
                     ),
@@ -68,19 +80,23 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Choose Event'),
-                    DropdownButton(
+                    //EventSelectButton
+                    DropdownButton<String>(
                       value: _selectedActivity,
-                      items: activitiesOut
+                      items: reminders[dayIndex]
+                          .activities
                           .map((activity) => DropdownMenuItem(
                                 value: activity,
-                                child: Text(activity),
+                                child: Text(
+                                  activity,
+                                ),
                               ))
                           .toList(),
                       onChanged: (selectedValue) {
                         setState(() {
                           _selectedActivity = selectedValue as String;
                           _selectedEventIndex =
-                              activitiesOut.indexOf(selectedValue);
+                              activities.indexOf(selectedValue);
                         });
                         return;
                       },
@@ -98,8 +114,7 @@ class _HomeState extends State<Home> {
                     width: 20,
                   ),
 
-                  const Text('Time'),
-                  const Spacer(),
+                  const Text('Pick Time:'),
                   //TimePickerButton
                   IconButton(
                     onPressed: () async {
@@ -117,10 +132,12 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            const Text('Completed Tasks:'),
+            const Text('Tasks:'),
             Expanded(
               child: RemindList(
-                reminderData: reminders,
+                reminderData: reminders[dayIndex],
+                onRemoveEvent: onRemoveTask,
+                onCompleteEvent: onCompleteEvent,
               ),
             ),
           ],

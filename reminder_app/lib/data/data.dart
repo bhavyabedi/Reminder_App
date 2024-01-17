@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reminder_app/models/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 TimeOfDay timeconvert(String normtime) {
   int hour;
@@ -20,29 +23,19 @@ TimeOfDay timeconvert(String normtime) {
   return TimeOfDay(hour: hour, minute: minute);
 }
 
-final List<String> activitiesOut = [
-  //out as in outsourced
-  "Wake up",
-  'Go to gym',
-  "Breakfast",
-  "Meetings",
-  "Lunch",
-  "Quick nap",
-  "Go to library",
-  "Dinner",
-  "Go to sleep"
-];
-final List<TimeOfDay> times = [
-  timeconvert('8:00 AM'),
-  timeconvert('8:00 AM'),
-  timeconvert('9:00 AM'),
-  timeconvert('10:00 AM'),
-  timeconvert('12:00 PM'),
-  timeconvert('2:00 PM'),
-  timeconvert('4:00 PM'),
-  timeconvert('7:00 PM'),
-  timeconvert('10:00 PM'),
-];
+Map<String, dynamic> toJson() => {
+      "days": [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ],
+    };
+
+//days list
 final List<String> days = [
   'Monday',
   'Tuesday',
@@ -53,40 +46,197 @@ final List<String> days = [
   'Sunday'
 ];
 
+final List<String> activities = [
+  "Wake up",
+  'Go to gym',
+  "Breakfast",
+  "Meetings",
+  "Lunch",
+  "Quick nap",
+  "Go to library",
+  "Dinner",
+  "Go to sleep"
+];
 final List<ActivityData> reminders = [
   ActivityData(
     day: days[0],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   ),
   ActivityData(
     day: days[1],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      //out as in outsourced
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   ),
   ActivityData(
     day: days[2],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      //out as in outsourced
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   ),
   ActivityData(
     day: days[3],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      //out as in outsourced
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   ),
   ActivityData(
     day: days[4],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      //out as in outsourced
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   ),
   ActivityData(
     day: days[5],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      //out as in outsourced
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   ),
   ActivityData(
     day: days[6],
-    activities: activitiesOut,
-    time: times,
+    activities: [
+      //out as in outsourced
+      "Wake up",
+      'Go to gym',
+      "Breakfast",
+      "Meetings",
+      "Lunch",
+      "Quick nap",
+      "Go to library",
+      "Dinner",
+      "Go to sleep"
+    ],
+    time: [
+      timeconvert('8:00 AM'),
+      timeconvert('8:00 AM'),
+      timeconvert('9:00 AM'),
+      timeconvert('10:00 AM'),
+      timeconvert('12:00 PM'),
+      timeconvert('2:00 PM'),
+      timeconvert('4:00 PM'),
+      timeconvert('7:00 PM'),
+      timeconvert('10:00 PM'),
+    ],
   )
 ];
