@@ -20,7 +20,7 @@ class RemindList extends StatefulWidget {
 class _RemindListState extends State<RemindList> {
   @override
   Widget build(BuildContext context) {
-    Color dismissedColor = Colors.orange;
+    Color dismissedColor = Colors.blueGrey[800]!;
     return ListView.builder(
       itemCount: widget.reminderData.activities.length,
       itemBuilder: (ctx, index) => Dismissible(

@@ -21,6 +21,7 @@ class _HomeState extends State<Home> {
   void onRemoveTask(int index, String event) {
     setState(() {
       reminders[index].activities.remove(event);
+      reminders[index].time.removeAt(index);
     });
   }
 
