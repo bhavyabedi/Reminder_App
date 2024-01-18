@@ -12,7 +12,23 @@ void main() {
                 color: Colors.black,
               ),
             ),
-        scaffoldBackgroundColor: Colors.blueGrey[100],
+        appBarTheme: AppBarTheme(
+          color: Colors.purple[200],
+        ),
+        scaffoldBackgroundColor: Colors.purple[100],
+        cardTheme: ThemeData().cardTheme.copyWith(
+              color: Colors.deepPurple[200],
+            ),
+        dropdownMenuTheme: DropdownMenuThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+          textStyle: TextStyle(
+            color: Colors.blueGrey[900],
+          ),
+        ),
       ),
       home: const Home(),
     ),
