@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/data/data.dart';
+import 'package:reminder_app/models/data.dart';
 import 'package:reminder_app/remind_list.dart';
 
 class Home extends StatefulWidget {
@@ -14,26 +15,31 @@ class Home extends StatefulWidget {
 String _selectedActivity = 'Go to sleep';
 String _selectedDay = 'Monday';
 TimeOfDay _selectedTime = TimeOfDay.now();
-int _selectedEventIndex = 0;
+int eventIndex = 0;
 int dayIndex = 0;
 
 class _HomeState extends State<Home> {
-  void onRemoveTask(int index, String event) {
+  void onRemoveTask(int index) {
     setState(() {
-      reminders[index].activities.remove(event);
-      reminders[index].time.removeAt(index);
+      reminders[index].pendingActivity.removeAt(index);
+      reminders[index].pendingTime.removeAt(index);
     });
   }
 
-  void onCompleteEvent(int index, String event) {
+  void onCompleteEvent(int index) {
     setState(() {
-      reminders[index].activities.remove(event);
+      reminders[index].completedActivity[index] =
+          reminders[index].pendingActivity[index];
+      reminders[index].completedTime[index] =
+          reminders[index].pendingTime[index];
+      reminders[index].pendingActivity.removeAt(index);
+      reminders[index].pendingTime.removeAt(index);
     });
   }
 
-  void timeSelected(int index) {
+  void timeSelected() {
     setState(() {
-      reminders[index].time[index] = _selectedTime;
+      reminders[dayIndex].pendingTime[eventIndex] = _selectedTime;
     });
   }
 
@@ -85,19 +91,24 @@ class _HomeState extends State<Home> {
                     DropdownButton<String>(
                       value: _selectedActivity,
                       items: reminders[dayIndex]
-                          .activities
+                          .pendingActivity
                           .map((activity) => DropdownMenuItem(
                                 value: activity,
                                 child: Text(
                                   activity,
                                 ),
+                                onTap: () {
+                                  setState(() {
+                                    eventIndex = reminders[dayIndex]
+                                        .pendingActivity
+                                        .indexOf(activity);
+                                  });
+                                },
                               ))
                           .toList(),
                       onChanged: (selectedValue) {
                         setState(() {
                           _selectedActivity = selectedValue as String;
-                          _selectedEventIndex =
-                              activities.indexOf(selectedValue);
                         });
                         return;
                       },
@@ -126,7 +137,7 @@ class _HomeState extends State<Home> {
                       setState(() {
                         _selectedTime = time!;
                       });
-                      timeSelected(_selectedEventIndex);
+                      timeSelected();
                     },
                     icon: const Icon(Icons.more_time_sharp),
                   ),

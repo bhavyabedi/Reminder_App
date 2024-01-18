@@ -60,7 +60,7 @@ final List<String> activities = [
 final List<ActivityData> reminders = [
   ActivityData(
     day: days[0],
-    activities: [
+    pendingActivity: [
       "Wake up",
       'Go to gym',
       "Breakfast",
@@ -71,7 +71,8 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -82,10 +83,11 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   ),
   ActivityData(
     day: days[1],
-    activities: [
+    pendingActivity: [
       //out as in outsourced
       "Wake up",
       'Go to gym',
@@ -97,7 +99,8 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -108,10 +111,11 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   ),
   ActivityData(
     day: days[2],
-    activities: [
+    pendingActivity: [
       //out as in outsourced
       "Wake up",
       'Go to gym',
@@ -123,7 +127,8 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -134,10 +139,11 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   ),
   ActivityData(
     day: days[3],
-    activities: [
+    pendingActivity: [
       //out as in outsourced
       "Wake up",
       'Go to gym',
@@ -149,7 +155,8 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -160,10 +167,11 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   ),
   ActivityData(
     day: days[4],
-    activities: [
+    pendingActivity: [
       //out as in outsourced
       "Wake up",
       'Go to gym',
@@ -175,7 +183,8 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -186,10 +195,11 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   ),
   ActivityData(
     day: days[5],
-    activities: [
+    pendingActivity: [
       //out as in outsourced
       "Wake up",
       'Go to gym',
@@ -201,7 +211,8 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -212,10 +223,11 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   ),
   ActivityData(
     day: days[6],
-    activities: [
+    pendingActivity: [
       //out as in outsourced
       "Wake up",
       'Go to gym',
@@ -227,7 +239,10 @@ final List<ActivityData> reminders = [
       "Dinner",
       "Go to sleep"
     ],
-    time: [
+    completedActivity: [
+      "Wake up",
+    ],
+    pendingTime: [
       timeconvert('8:00 AM'),
       timeconvert('8:00 AM'),
       timeconvert('9:00 AM'),
@@ -238,5 +253,6 @@ final List<ActivityData> reminders = [
       timeconvert('7:00 PM'),
       timeconvert('10:00 PM'),
     ],
+    completedTime: [],
   )
 ];
