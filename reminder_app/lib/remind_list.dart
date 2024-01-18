@@ -52,13 +52,17 @@ class _RemindListState extends State<RemindList> {
             case DismissDirection.startToEnd:
               setState(() {
                 dismissedColor = Colors.green;
+                widget.onCompleteEvent(
+                    index, widget.reminderData.activities[index]);
               });
-              widget.onCompleteEvent(
-                  index, widget.reminderData.activities[index]);
+
               break;
             case DismissDirection.endToStart:
-              widget.onRemoveEvent(
-                  index, widget.reminderData.activities[index]);
+              setState(() {
+                widget.onRemoveEvent(
+                    index, widget.reminderData.activities[index]);
+              });
+
               break;
             default:
               print('Nothing');
