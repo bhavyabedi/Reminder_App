@@ -19,6 +19,25 @@ String _selectedDay = 'Monday';
 TimeOfDay _selectedTime = TimeOfDay.now();
 int _selectedEventIndex = 0;
 int dayIndex = 0;
+List<ActivityData> readRemindersFromJsonFile(String filePath) {
+  try {
+    // Read the JSON file content as a string
+    String jsonString = File(filePath).readAsStringSync();
+
+    // Parse the JSON string into a List<Map<String, dynamic>>
+    List<dynamic> jsonDataList = json.decode(jsonString);
+
+    // Create a List of Reminders from the parsed JSON data
+    List<ActivityData> remindersList =
+        jsonDataList.map((json) => ActivityData.fromJson(json)).toList();
+
+    return remindersList;
+  } catch (e) {
+    // Handle errors
+    print('Error reading JSON file: $e');
+    return [];
+  }
+}
 
 class _HomeState extends State<Home> {
   void onRemoveTask(int index, String event) {
@@ -28,6 +47,8 @@ class _HomeState extends State<Home> {
     });
   }
 
+  List<ActivityData> Reminders =
+      readRemindersFromJsonFile('reminder_app/lib/data.json');
   void modifyjson() {
     // Convert the modified list of MyData objects back to JSON
     List<Map<String, dynamic>> updatedJsonDataList =
@@ -40,13 +61,16 @@ class _HomeState extends State<Home> {
 
   void onCompleteEvent(int index, String event) {
     setState(() {
-      Reminders[index].pendingActivity.remove(event);
+      Reminders[dayIndex].completedActivity.add(event);
+      Reminders[dayIndex].pendingActivity.remove(event);
+      modifyjson();
     });
   }
 
   void timeSelected(int index) {
     setState(() {
-      Reminders[index].time[index] = _selectedTime;
+      Reminders[dayIndex].time[index] = _selectedTime;
+      modifyjson();
     });
   }
 

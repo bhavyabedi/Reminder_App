@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:reminder_app/models/data.dart';
+import 'package:reminder_app/home.dart';
 
 class RemindList extends StatefulWidget {
   const RemindList({
@@ -19,36 +17,32 @@ class RemindList extends StatefulWidget {
   @override
   State<RemindList> createState() => _RemindListState();
 }
-Future<void> readJson() async{
-  final String response=await rootBundle.loadString(key)
-}
+
 class _RemindListState extends State<RemindList> {
   @override
   Widget build(BuildContext context) {
-    // Read the JSON file content
-
-    print(Reminders);
+    print(widget.reminderData);
     Color dismissedColor = Colors.orange;
     return ListView.builder(
-      itemCount: Reminders[1].pendingActivity.length,
+      itemCount: widget.reminderData.pendingActivity.length,
       itemBuilder: (ctx, index) => Dismissible(
         key: ValueKey(
-          Reminders[index].pendingActivity[index],
+          widget.reminderData.pendingActivity[index],
         ),
         background: Card(
           color: dismissedColor,
         ),
         child: Card(
           key: ValueKey(
-            Reminders[index].pendingActivity[index],
+            widget.reminderData.pendingActivity[index],
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
-                Text(Reminders[index].pendingActivity[index]),
+                Text(widget.reminderData.pendingActivity[index]),
                 const Spacer(),
-                Text({Reminders[index].time[index]}
+                Text({widget.reminderData.time[index]}
                     .toString()
                     .substring(11, 16)),
               ],
